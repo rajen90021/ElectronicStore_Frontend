@@ -1,0 +1,25 @@
+<div class="row mx-4 my-3" >
+
+    <div class="col-md-2">
+
+<div class="mt-3">
+    <app-category-view></app-category-view>
+</div>
+    </div>
+    <div class="col-md-10">
+
+        <div class="row gx-2 align-items-stretch"
+          
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="200"
+          (scrolled)="productscrolled($event)"
+        *ngIf="productresponse">
+
+            <div class=" col-lg-4 col-xl-4  col-md-6   mt-3" [ngClass]="{'border-danger':!product.stock,'text-danger':!product.stock}" *ngFor="let product of productresponse.content">
+
+             <app-single-product-card [product]="product"></app-single-product-card>
+            </div>
+        </div>
+    </div>
+</div>

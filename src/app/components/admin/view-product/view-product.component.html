@@ -1,0 +1,247 @@
+
+
+<div class="row mt-4">
+
+    <div class="col-md-12">
+
+        <div class="responsive-table">
+
+           <table class="table table-bordered table-hover shadow-sm border">
+
+                <thead>
+
+
+   <tr>
+    <th scope="col">s.no</th>
+
+  
+    <th scope="col">name</th>
+    <th scope="col">quantity</th>
+    <th scope="col">price</th>
+    <th scope="col">discounted price</th>
+    <th scope="col">stock</th>
+    <th scope="col">live</th>
+    <th scope="col">category</th>
+    <th scope="col">action</th>
+   </tr>
+
+                </thead>
+                <tbody class="table-group-divider">
+  <tr *ngFor="let product of productresponse?.content;  let i=index" >
+   <td >
+    {{i+1}}
+   </td>
+   <td role="button" (click)="open(content,product)">
+    {{product.title}}
+   </td>
+   <td>
+    {{product.quantity}}
+   </td>
+   <td>
+    {{product.price}}
+   </td>
+   <td>
+    {{product.discount}}
+   </td>
+   <td>
+    <span class="badge" [ngClass]="{'text-bg-success':product.stock,'text-bg-danger':!product.stock}">{{product.stock? 'in stock':'out of stock'}}</span>
+    
+   </td>
+   <td>
+    <span class="badge" [ngClass]="{'text-bg-success':product.live,'text-bg-danger':!product.live}">{{product.live? 'in live':'out of live'}}</span>
+    
+   </td>
+   <td>
+    {{product.category.title}}
+   </td>
+   <td>
+    <button class=" btn btn-primary btn-sm" (click)="toggleupdateview(content,product)">update</button>
+    <button class=" btn btn-danger ms-2 btn-sm" [swal]="confirmSwal"  (confirm)="yesdeleteproduct(product.id)">delete</button>
+   </td>
+  </tr>
+
+                </tbody>
+            </table>
+
+            <div *ngIf="productresponse">
+
+
+                <div>
+
+                    <ngb-pagination 
+                     
+                     [collectionSize]="productresponse.totalelement"
+                     [page]="productresponse.pagenumber+1"
+                     [pageSize]="productresponse.pageseize"
+                     [ellipses]="true"
+                     [maxSize]="10"
+                     (pageChange)="pagechange($event)"
+                    >
+                    </ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">{{product?.title}}</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+
+    <!-- view mode lbody -->
+	<div class="modal-body" *ngIf="product && !update">
+		<div class="image-container text-center mb-3">
+            <img [src]="productservice.getporudctimageurl(product.id)" alt="">
+            
+            
+        </div>
+        <!-- <h3 class="text-center mb-3">{{product.title}}</h3> -->
+        <div class="information mb-3">
+            <table class="table table-bordered text-center">
+                <tbody>
+                    <tr>
+                        <td class="fw-bold">price</td>
+                        <td>{{product.price}}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">discounted price</td>
+                        <td>{{product.discount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">quantity</td>
+                        <td>{{product.quantity}}</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">stock</td>
+                        <td>
+                            <span class="badge" [ngClass]="{'text-bg-success':product.stock,'text-bg-danger':!product.stock}">{{product.stock? 'in stock':'out of stock'}}</span>
+                            
+                           </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">live</td>
+                        <td>
+                            <span class="badge" [ngClass]="{'text-bg-success':product.live,'text-bg-danger':!product.live}">{{product.live? 'in live':'out of live'}}</span>
+                            
+                           </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">category</td>
+                        <td>{{product.category.title}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="card">
+                <div class="card-body">
+                    <div class="discription">
+                        {{product.discription}}
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+
+     <!-- update  mode lbody -->
+	<div class="modal-body" *ngIf="product && update">
+
+        <form (ngSubmit)="updatefromsubmit($event)">
+		<div class="image-container text-center mb-3">
+            <img [src]="productservice.getporudctimageurl(product.id)" alt="">
+            
+            
+        </div>
+       
+
+        <div class="form-group y-2">
+            <label for="title">product title</label>
+            <input type="text" [(ngModel)]="product.title" name="title" class="form-control">
+        </div>
+        <div class="information mb-3">
+            <table class="table table-bordered text-center">
+                <tbody>
+                    <tr>
+                        <td class="fw-bold">price</td>
+                        <td>
+                            <input type="text"name="price" class="form-control text-center" [(ngModel)]="product.price">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">discounted price</td>
+                        <input type="text" name="discount" class="form-control text-center" [(ngModel)]="product.discount">
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">quantity</td>
+                        <input type="text" name="quantity" class="form-control text-center" [(ngModel)]="product.quantity">
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">stock</td>
+                        <td>
+                            <input type="checkbox" name="stock" [(ngModel)]="product.stock" class="me-3" id="">
+                            <span class="badge" [ngClass]="{'text-bg-success':product.stock,'text-bg-danger':!product.stock}">{{product.stock? 'in stock':'out of stock'}}</span>
+                            
+                           </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">live</td>
+                        <td>
+                            <input type="checkbox" name="live" [(ngModel)]="product.live" class="me-3" id="">
+                            <span class="badge" [ngClass]="{'text-bg-success':product.live,'text-bg-danger':!product.live}">{{product.live? 'in live':'out of live'}}</span>
+                            
+                           </td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">category</td>
+                        <label for="category">Category:</label>
+                        <div class="form-group input-group col-md-6 mt-3 ">
+                          
+                            <select class="form-control" id="category" required  [compareWith]="comparefn" [(ngModel)]="product.category" name="category">
+                                <option [ngValue]="{title:'',discription:'',coverimage:'',categoryid:''}"  disabled selected>---select category---</option>
+                              <option [ngValue]="cat"  *ngFor="let cat of categories">{{cat.title}}</option>
+                              
+                            </select>
+                            <button type="button" (click)="updateproductcategory()" class=" btn btn-outline-secondary">save</button>
+                          </div>
+                          
+                    </tr>
+                </tbody>
+            </table>
+            <div class="card">
+                <div class="card-body">
+                    <div class="discription">
+                        <textarea class="form-control" id="description" rows="3" placeholder="Enter description" name="description" [(ngModel)]="product.discription"></textarea>
+
+                    </div>
+                </div>
+            </div>
+            <div class="my-3 text-center">
+                <button type="submit" class="btn btn-outline-dark"> save</button>
+            </div>
+        </div>
+    </form>
+	</div>
+    <div class="modal-footer">
+		<button type="button" (click)="toogleupdateview1()" class="btn" [ngClass]="{'btn-success':update,'btn-danger':!update }" >{{update?"view":"update"}}</button>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">close</button>
+	</div>
+</ng-template>
+
+<!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->
+
+
+<swal
+
+ #confirmSwal
+ [title]="['are you sure ?']"
+ [text]="'delete product' "
+ [confirmButtonText]="'delete'"
+ [confirmButtonColor]="'red'"
+ [showCancelButton]="true"
+ [icon]="'info'"
+
+ >
+
+</swal>

@@ -1,0 +1,33 @@
+<div class="row mt-3 border-bottom" *ngIf="cartitem">
+    <div class="col-md-2">
+        <div class="image-container text-center">
+            <img 
+              
+
+            [src]="productservice.getporudctimageurl(cartitem.product.id)" alt="">
+        </div>
+    </div>
+    <div class="col-md-8">
+
+        <p class="fw-bold fs-5">{{cartitem.product.title}}</p>
+        
+
+        <div class="row">
+            <div class="col-md-4">
+                <p>price ₹: <span class="text-muted text-decoration-line-through">{{cartitem.product.price}}</span>  <span class="fw-bold ms-2 fw-bolder text-success">{{cartitem.product.discount}}</span></p>
+            </div>
+            <div class="col-md-4">
+    
+               quantity : <span class="fw-bold ms-2">{{cartitem.quantity}}</span>
+            </div>
+            <div class="col-md-4">
+                total price: <span class="fw-bold ms-2">{{cartitem.totolprice}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+      <button class="btn  btn-outline-primary mt-5" (click)="increaseQuantity(cartitem)"><i class="fa-solid fa-plus"></i></button>
+      <button class="btn  btn-outline-warning mt-5 ms-2" (click)="decearseQuantity(cartitem)"><i class="fa-solid fa-minus"></i></button>
+      <button class="btn  btn-outline-danger mt-5 ms-2" (click)="deleteproduct(cartitem)"><i class="fa-solid fa-trash"></i></button>
+    </div>
+</div>

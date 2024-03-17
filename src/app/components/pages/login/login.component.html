@@ -1,0 +1,54 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <i class="fas fa-user" style="font-size: 30px;" aria-hidden="true"></i>
+                    <h3> Login here </h3>
+                </div>
+                <div class="card-body">
+                    <form #logindataa="ngForm" (ngSubmit)="logindatasubmit($event)">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" [class.is-invalid]="email.touched && email.invalid" #email="ngModel" [(ngModel)]="logindata.email" placeholder="Enter email" required>
+                        </div>
+                        <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+    
+                            <div *ngIf="email.errors && email.errors['required']">
+                            email is requiresd
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" [class.is-invalid]="pass.touched && pass.invalid" [(ngModel)]="logindata.password" #pass="ngModel" required="" placeholder="Password">
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="pass.touched && pass.invalid">
+    
+                            <div *ngIf="pass.errors && pass.errors['required']">
+                            email is requiresd
+                            </div>
+                        </div>
+
+                        <div class="text-center mb-2">
+                          don't have and account <a href="" [routerLink]="'/signup'">click here </a>
+
+                        </div>
+                        <div class="text-center mb-2">
+                            dont remember password  <a href="" [routerLink]="'/signup'">click here </a>
+  
+                          </div>
+                        <div class="text-center">
+                            <button type="submit" [class.disabled]="logindataa.form.invalid" class="btn btn-primary btn-sm">Submit</button>
+                            <button type="reset" class="btn btn-secondary btn-sm ms-2">Reset</button>
+                        </div>
+                        <div class="conatainer mt-2 d-flex justify-content-center">
+                            <asl-google-signin-button  shape="pill" logo_alignment="center" theme="filled_blue" type='standard' size='medium'>sign with google</asl-google-signin-button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{logindata| json}}

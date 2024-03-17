@@ -1,0 +1,15 @@
+<div class="card">
+    <img [src]="catagory?.coverimage" class="card-img-top cover-image" alt="Category 1 Cover Image">
+    <div class="card-body">
+      <h5 class="card-title">{{catagory?.title}}</h5>
+      <p class="card-text">{{catagory?.discription  | slice:0:40}}...</p>
+      <!-- Add additional information or buttons here if needed -->
+    </div>
+
+
+    <div class="row text-center px-4">
+      <button class="btn btn-secondary btn-sm">view </button>
+    </div>
+  </div>
+
+  

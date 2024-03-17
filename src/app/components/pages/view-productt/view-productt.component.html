@@ -1,0 +1,93 @@
+<div class="container">
+
+    <div class="card" >
+        <div class="card-body">
+    <h3> {{product?.title}}</h3>
+
+     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem tempora facilis quasi debitis soluta veniam odit possimus, ipsum et quia ducimus nam optio, incidunt excepturi praesentium, ullam ea illum quidem. Incidunt aliquam hic consectetur voluptas nam. Voluptates aperiam animi corrupti distinctio facilis sunt omnis consequatur molestias natus, inventore, iusto repellendus.</p>
+
+
+     <div class="row align-items-center">
+
+        <div class="col-md-6">
+<div class="image-container text-center py-4">
+
+     <img   [src]="productserive.getporudctimageurl(product!.id)" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR29wQph51dQolFu7iVcsnfBYqvzWEfmLTmStqobZbEdw&s'" alt="">
+</div>
+        </div>
+        <div class="col-md-6" >
+
+<div class="table-responsive">
+    <table class="table">
+
+        <tbody>
+
+            <tr>
+
+                <td>
+
+                    category
+                </td>
+                <td class="fw-bold">{{product?.title}}</td>
+            </tr>
+            <tr>
+
+                <td>
+
+                    category
+                </td>
+                <td class="fw-bold">{{product?.category?.title}}</td>
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    stock
+                </td>
+                <td class="fw-bold">
+                    <span class="badge text-bg-success" 
+                    [ngClass]="{' text-bg-success':product?.stock,' text-bg-danger':!product?.stock}"
+                    >
+                        {{ product?.stock ? 'in stock' : 'out of stock' }}
+                    </span>
+                </td>
+                
+            </tr>
+            <tr>
+
+                <td class="fs-2">
+
+                    price
+                </td>
+                <td class="fs-2">
+                   <span class="text-decoration-line-through text-muted" > ₹{{product?.price}}</span>
+                   <span class="fw-bold text-success">₹{{product?.discount}}</span>
+                </td>
+                
+            </tr>
+
+            <tr>
+                <td>
+      <button (click)="addtocartrequest(product!)" class="btn" [ngClass]="{'btn-outline-primary':product?.stock,'btn-outline-danger':!product?.stock}"> {{!product?.stock? "out of stock":" add to card "}}</button>
+  <button class="btn btn-secondary ms-2" routerLink="/store" >back to store</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+        </div>
+     </div>
+
+
+     <div class="my-3">
+        <p [innerHTML]="product?.discription"></p>
+        <div class="container text-center">
+            <button (click)="addtocartrequest(product!)" class="btn" [ngClass]="{'btn-outline-primary':product?.stock,'btn-outline-danger':!product?.stock}"> {{!product?.stock? "out of stock":" add to card "}}</button>
+            <button class="btn btn-secondary ms-2" routerLink="/store" >back to store</button>
+        </div>
+     </div>
+        </div>
+    </div>
+</div>
+

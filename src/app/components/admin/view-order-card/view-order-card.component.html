@@ -1,0 +1,27 @@
+<div class="row border-lg" >
+    <div class="col">
+        <p>ORDER ID : <span class="fw-bold">{{order?.orderid}}</span>  </p>
+    </div>
+    <div class="col">
+        <p>ORDERD DATE : <span class="fw-bold">{{order?.orderDate|date:'dd-mm-yyyy'}}</span>  </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p>ORDER STATUS : <span class="fw-bold badge" [ngClass]="{'text-bg-success':order?.orderstatus==orderstatus.DELIVERED,'text-bg-danger':order?.orderstatus!==orderstatus.DELIVERED}">{{order?.orderstatus}}</span>  </p>
+    </div>
+    <div class="col">
+        <p>PAYMENT STATUS : <span class="fw-bold badge" [ngClass]="{'text-bg-danger':order?.paymentstatus!=paymentstatus.PAID,'text-bg-success':order?.paymentstatus==paymentstatus.PAID}">{{order?.paymentstatus}}</span>  </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p>USER NAME: <span class="fw-bold">{{order?.users?.name}}</span>  </p>
+    </div>
+    <div class="col">
+        <p>BILLING NAME: <span class="fw-bold">{{order?.billingName| uppercase}}</span>  </p>
+    </div>
+</div>
+
+
+

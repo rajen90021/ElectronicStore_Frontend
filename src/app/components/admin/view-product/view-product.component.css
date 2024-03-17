@@ -1,0 +1,8 @@
+.body{
+    background-color: #553b3b;
+    }
+
+    .image-container img{
+        max-height: 250px;
+        width: auto;
+    }

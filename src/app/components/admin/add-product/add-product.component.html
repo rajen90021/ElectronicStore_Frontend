@@ -1,0 +1,77 @@
+ <!-- {{product|json}} -->
+<div class="container-fluid">
+    <div class="card">
+
+      <div class="card-body">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+              <h2 class="text-center mb-4">Product Details</h2>
+              <form (ngSubmit)="productsubmited($event)">
+                <div class="form-group">
+                  <label for="title">Title:</label>
+                  <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" [(ngModel)]="product.title" >
+                </div>
+                <div class="form-group mt-3">
+                  <label for="description">Description:</label>
+                  <textarea class="form-control" id="description" rows="3" placeholder="Enter description" name="description" [(ngModel)]="product.discription"></textarea>
+              
+                </div>
+                <div class="form-row mt-3">
+                  <div class="form-group col-md-6">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" class="form-control" id="quantity" placeholder="Enter quantity" name="quantity" [(ngModel)]="product.quantity">
+                  </div>
+                  <div class="form-group col-md-6 mt-3">
+                    <label for="price">Price:</label>
+                    <input type="number" class="form-control" id="price" placeholder="Enter price"  name="price" [(ngModel)]="product.price">
+                  </div>
+                </div>
+                <div class="form-row mt-3">
+                  <div class="form-group col-md-6">
+                    <label for="discount">Discount:</label>
+                    <input type="number" class="form-control" id="discount" placeholder="Enter discount" name="discount" [(ngModel)]="product.discount">
+                  </div>
+                  <div class="form-group col-md-6 mt-3">
+                    <label for="live">Live:</label>
+                    <select class="form-control" id="live" name="live" [(ngModel)]="product.live">
+                      <option value="true">True</option>
+                      <option value="false">False</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row mt-3">
+                  <div class="form-group col-md-6">
+                    <label for="stock">Stock:</label>
+                    <select class="form-control" id="stock" name="stock" [(ngModel)]="product.stock">
+                      <option value="true">True</option>
+                      <option value="false">False</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6 mt-3 ">
+                    <label for="category">Category:</label>
+                    <select class="form-control" id="category" required  [compareWith]="comparefn" [(ngModel)]="product.category" name="category">
+                        <option [ngValue]="{title:'',discription:'',coverimage:'',categoryid:''}"  disabled selected>---select category---</option>
+                      <option [ngValue]="cat"  *ngFor="let cat of categories">{{cat.title}}</option>
+                      
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <label for="productimage">Product Image:</label>
+
+                  <div class="text-center my-3" *ngIf="imagedata.previewFileUrl">
+                    <img style="height: 250px;width:auto" [src]="imagedata.previewFileUrl" alt="prive image ">
+                  </div>
+                  <input type="file" class="form-control-file" id="productimage" (change)="productimageupload($event)">
+                </div>
+               <div class="text-center mt-3">
+                  <button type="submit" class="btn btn-primary btn-sm btn-block">Submit</button>
+                  <button type="reset" class="btn btn-secondary btn-sm ms-2 btn-block">reset</button>
+               </div>
+              </form>
+            </div>
+          </div>
+    </div>
+    </div>
+  </div>
+  

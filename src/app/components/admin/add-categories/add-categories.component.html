@@ -1,0 +1,35 @@
+<div class="card shadow-lg border ">
+
+    <div class="card-body">
+  <div class="text-center">
+    <h2>add category</h2>
+  </div>
+        
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form (ngSubmit)="categoryformsubmit($event)">
+          
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" [(ngModel)]="category.title">
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" rows="3" placeholder="Enter description" name="description" [(ngModel)]="category.discription"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="coverImage" class="form-label">Cover Image url</label>
+            <input type="text" class="form-control" id="coverImage" name="coverImage" [(ngModel)]="category.coverimage">
+          </div>
+         <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-sm ">Submit</button>
+            <button type="reset" class="btn btn-secondary btn-sm ms-2">reset</button>
+         </div>
+        </form>
+      </div>
+    </div>
+  </div>
+    </div>
+</div>
+{{category | json}}

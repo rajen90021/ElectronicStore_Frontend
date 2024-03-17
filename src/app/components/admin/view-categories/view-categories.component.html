@@ -1,0 +1,56 @@
+<div class="row">
+
+    <div class="col-md-4 mb-4" *ngFor="let c of categories">
+       <app-single-categories-view [catagory]="c" (click)="open(content,c)"></app-single-categories-view>
+      </div>
+  
+</div>
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">{{selectedcategory?.title}}</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+
+       <div class="view" *ngIf="!updateview">
+		<div class="image-container">
+            <img class="img-fluid" [src]="selectedcategory?.coverimage" alt="">
+        </div>
+		<p>{{selectedcategory?.discription}}</p>
+	   </div>
+	</div>
+
+	<!-- div to update form -->
+
+	<div class="update text-muted" *ngIf="updateview">
+		<form>
+			<div class="mb-3">
+			  <label for="title" class="form-label">Title</label>
+			  <input type="text" class="form-control" id="title" name="title" [(ngModel)]="selectedcategory!.title" placeholder="Enter title">
+			</div>
+			<div class="mb-3">
+			  <label for="description" class="form-label">Description</label>
+			  <textarea class="form-control" id="description" rows="3" [(ngModel)]="selectedcategory!.discription" name="description" placeholder="Enter description"></textarea>
+			</div>
+			<div class="mb-3">
+			  <label for="image" class="form-label">cover image url</label>
+			  <div class="update-cover-image text-center my-2">
+				<img  style="width: 200px;height: auto" [src]="selectedcategory?.coverimage" alt="">
+			  </div>
+			  <input type="text" [(ngModel)]="selectedcategory!.coverimage" name="coverimage" class="form-control" id="image">
+			</div>
+			<div class="text-center row px-4">
+				<button type="submit" class="btn btn-primary" (click)="updateselectedcategoryy()">save</button>
+			</div>
+			
+		  </form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">close</button>
+        <button type="button" class="btn btn-outline-dark" (click)="updatetoggleview()">update</button>
+        <button type="button" class="btn btn-outline-danger"  (click)="deletecategory(selectedcategory?.categoryid)">delete</button>
+	</div>
+</ng-template>
+
+<!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button> -->

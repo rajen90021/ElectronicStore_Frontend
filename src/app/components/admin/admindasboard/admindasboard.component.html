@@ -1,0 +1,40 @@
+
+
+ <div class="admin-layout">
+
+    <div class="sidebar d-flex  flex-column justify-content-between bg-dark pt-3">
+
+        <ul class="nav flex-column">
+  <li class="nav-item" *ngFor="let m of adminmenus">
+
+   <a href="#!" class="nav-link text-white" [routerLink]="[m.link]" routerLinkActive="active">
+    <i [ngClass]="m.icon"></i>
+   <span class="ms-1"> {{m.title}}</span></a>
+  </li>
+
+        </ul>
+
+        <ul class="nav flex-column" style=" margin-bottom:  70px;">
+            <!-- <li class="nav-item">
+          
+             <a href="#!" class="nav-link text-white">
+                <i class="fa-solid fa-comment"></i>
+             <span class="ms-1" [routerLink]=""> feedback</span></a>
+            </li> -->
+            <li class="nav-item">
+               <a href="#!" class="nav-link text-white" routerLink="/admin/feedback">
+                 <i class="fa-solid fa-comment"></i>
+                 <span class="ms-1">Feedback</span>
+               </a>
+             </li>
+             
+          
+                  </ul>
+
+    </div>
+    <div class="content px-2 py-2">
+       <div class="container">
+        <router-outlet></router-outlet>
+       </div>
+    </div>
+ </div>

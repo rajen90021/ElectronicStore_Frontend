@@ -1,0 +1,120 @@
+
+
+<div class="container">
+
+
+    <div class="row mt-4">
+
+
+        <div class="col-md-6 offset-md-3">
+
+
+            <h5>{{user|json}}</h5>
+            <div class="card rounded border-dark">
+
+
+                <div class="card-header text-center">
+
+
+      <div >
+            <img src="/assets/images/login.svg"style="width:150px ;"  alt="" class="img-fluid">
+      </div>
+
+                    <h3>signup here </h3>
+
+
+
+                </div>
+
+                <div class="card-body">
+                    <form novalidate #formvalue="ngForm" (ngSubmit)="formsubmit($event,formvalue)">
+                        <div class="form-group mb-3">
+                            <label for="name">Name</label> 
+                            <input type="text" [class.is-invalid]="name.touched && name.invalid"  required class="form-control" id="name" name="name"  #name="ngModel" [(ngModel)]="user.name"  placeholder="Enter your name">
+                        </div>
+                        <div class="alert alert-danger" *ngIf="name.touched && name.invalid">
+    
+                            <div *ngIf="name.errors && name.errors['required']">
+                            name is requiresd
+                            </div>
+                        </div>
+                    
+                        <div class="form-group mb-3">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" [class.is-invalid]="name.touched && name.invalid" id="email" #email="ngModel" name="email" [(ngModel)]="user.email" placeholder="Enter email" required>
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+    
+                            <div *ngIf="email.errors && email.errors['required']">
+                                email  is requiresd
+                            </div>
+                        </div>
+                        <div class="form-group mb3">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" [class.is-invalid]="name.touched && name.invalid" id="password" #pass="ngModel" name="password" [(ngModel)]="user.password" placeholder="Password" required>
+                        </div>
+
+
+                        <div class="alert alert-danger" *ngIf="pass.touched && pass.invalid">
+    
+                            <div *ngIf="pass.errors && pass.errors['required']">
+                                password is requiresd
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="about">About</label>
+                            <textarea class="form-control" id="about" rows="3" [class.is-invalid]="name.touched && name.invalid" #about="ngModel" placeholder="Tell us about yourself"  name="about" [(ngModel)]="user.about" required></textarea>
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="about.touched && about.invalid">
+    
+                            <div *ngIf="about.errors && about.errors['required']">
+                                about is requiresd
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="" class="d-block">gender</label>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" [class.is-invalid]="name.touched && name.invalid" #gender="ngModel" id="gender" value="male" [(ngModel)]="user.gender" required>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                  male
+                                </label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" [class.is-invalid]="name.touched && name.invalid" id="gender" #gender="ngModel" value="female" name="female" [(ngModel)]="user.gender" required="" >
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                 female
+                                </label>
+                              </div>
+                        </div>
+
+                        <div class="alert alert-danger" *ngIf="gender.touched && gender.invalid">
+    
+                            <div *ngIf="gender.errors && gender.errors['required']">
+                                about is requiresd
+                            </div>
+                        </div>
+
+
+                        <div class="text-center mb-2">
+                           already have an account  <a href="" [routerLink]="'/login'">click here </a>
+  
+                          </div>
+                        <div class="text-center">
+                            <!-- <input type="submit" [class.disabled]="formvalue.form.invalid" class="btn btn-primary" value="Regdister" /> -->
+                            <button type="submit" [disabled]="formvalue.form.invalid || isLoading" class="btn btn-success ms-3 mb-3 btn-sm">
+                                <span *ngIf="!isLoading">Register</span>
+                                <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <span *ngIf="isLoading" class="visually-hidden">Loading...</span>
+                            </button>
+                           <button type="reset" class="btn btn-danger ms-3 mb-3 btn-sm">reset </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

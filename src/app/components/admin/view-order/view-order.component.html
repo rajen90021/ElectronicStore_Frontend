@@ -1,0 +1,180 @@
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <div class="card" *ngIf="orderresponse">
+          
+            <div class="card-body border" >
+                <h3>all order({{orderresponse.content.length}})</h3>
+                <div class="list-group border">
+                    <div  (click)="openordermodel(content,order)" style="cursor: pointer;" class="list-group-item border shadow-sm mt-2 list-group-item-action"  *ngFor="let order of orderresponse.content">
+                       
+
+                        <app-view-order-card  [order]="order"></app-view-order-card>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">order details </h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+	
+        <div class="container-fluid" *ngIf="order">
+    
+             <h3><span class="text-muted"> order by</span> {{order.users.name}}</h3>
+    
+     <div class="responsive-table mt-4" *ngIf="!updatestate">
+        <table class="table table-bordered">
+
+            <tbody>
+
+                <tr>
+                    <td>
+                        billing name 
+                    </td>
+                    <td>{{order.billingName}} </td>
+                </tr>
+                <tr>
+                    <td>
+                        billing phone 
+                    </td>
+                    <td>{{order.billingphone}} </td>
+                </tr>
+                <tr>
+                    <td>
+                        billing address 
+                    </td>
+                    <td>{{order.billingaddress}} </td>
+                </tr>
+                <tr>
+                    <td>
+                       placed on 
+                    </td>
+                    <td>{{order.orderDate | date: 'dd-mm-yyyy'}} </td>
+                </tr>
+                <tr [ngClass]="{'table-success':order.orderstatus==orderstatus.DELIVERED,'table-danger':order.orderstatus!==orderstatus.DELIVERED}">
+                    <td>
+                      order status
+                    </td>
+                    <td>{{order.orderstatus}} </td>
+                </tr>
+                <tr [ngClass]="{'table-success':order.paymentstatus==paymentstatus.PAID, 'table-danger':order.paymentstatus==paymentstatus.NOTPAID}">
+                    <td>
+                      payment status
+                    </td>
+                    <td>{{order.paymentstatus}} </td>
+                </tr>
+                <tr>
+                    <td>
+                        amount
+                    </td>
+                    <td class="fw-bold">₹ {{order.orderamount}} </td>
+                </tr>
+                <tr>
+                    <td>
+                        delivered date
+                    </td>
+                    <td class="fw-bold">{{order.deliverddate ? order.deliverddate:'not yet'}} </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="list-group">
+
+            <div class="list-group-item" *ngFor="let item of order.orderitems">
+               <div class="row">
+                <div class="col-md-2 text-center">
+  <img   class="product_image img-fluid" [src]="productservice.getporudctimageurl(item.product.id)" alt="">
+                </div>
+                <div class="col-md-10">
+                    <p>{{item.product.title}}</p>
+
+
+                    <div class="row">
+                        <div class="col">
+                            <p>Quantity : {{item.quantity}}</p>
+                        </div>
+                        <div class="col">
+        <p>product price :<span class="fw-bold"> {{item.product.discount}}</span> </p>
+    
+                        </div>
+                    </div>
+                    <p>item price : <span class="fw-bold">{{item.totalprice}}</span> </p>
+                </div>
+               </div>
+
+            </div>
+        </div>
+     </div>
+
+     <!-- uodate order  -->
+     <div *ngIf="updatestate">
+
+  <form action="" (ngSubmit)="updateFormSubmitted($event)">
+    <!-- order status -->
+    <div class="mt-3">
+      <label for="order_status">Change Order Status</label>
+      <select
+        name="orderStatus"
+        [(ngModel)]="order.orderstatus"
+        class="form-control"
+        id=""
+      >
+        <option
+          [ngValue]="os.value"
+          *ngFor="let os of orderstatus | keyvalue"
+        >
+          {{ os.key }}
+        </option>
+      </select>
+    </div>
+    <!-- payment status -->
+    <div class="mt-3">
+      <label for="order_status">Change Payment Status</label>
+      <select
+        name="paymentStatus"
+        [(ngModel)]="order.paymentstatus"
+        class="form-control"
+        id=""
+      >
+        <option
+          [ngValue]="os.value"
+          *ngFor="let os of paymentstatus | keyvalue"
+        >
+          {{ os.key }}
+        </option>
+      </select>
+    </div>
+    <div class="container text-center">
+      <button type="submit" class="btn btn-success mt-3">Save</button>
+    </div>
+  </form>
+
+
+
+
+     </div>
+
+        </div>
+	</div>
+	<div class="modal-footer">
+     
+      <div class="container text-center">
+        <button (click)="changestate()" type="button" class="btn btn-outline-danger" *ngIf="_auth.checkloginandadminuser() | async" >{{updatestate?"view details":"update order "}}</button>
+		<button type="button" class="btn btn-outline-dark  ms-2" (click)="modal.close('Save click')">close</button>
+		<button *ngIf="order?.paymentstatus != paymentstatus.PAID" (click)="payorder(order)"   type="button" class="btn btn-outline-success  ms-2" >pay now </button>
+
+      </div>
+    </div>
+</ng-template>
+
+
+
+<!-- <button *ngIf="_auth.checkloginandadminuser() | async" (click)="changeState()" type="button" class="btn btn-outline-danger">
+{{ updateState ? "View Detail" : "Update Order" }}
+</button> -->

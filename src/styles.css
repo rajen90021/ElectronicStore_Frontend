@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'ngx-toastr/toastr';
+
+
+body{
+    background-color: rgb(216, 228, 239);
+}
+
+.admin-layout .sidebar{
+    width: 220px;
+    height: 100vh;
+    position: fixed;
+}
+.admin-layout .sidebar .nav-link:hover{
+    background-color: #e2e2e2!important;
+    color :#000 !important
+}
+.admin-layout .sidebar .nav-link.active{
+    background-color: #e2e2e2!important;
+    color :#000 !important
+}
+.admin-layout .content{
+    margin-left: 230px;
+}

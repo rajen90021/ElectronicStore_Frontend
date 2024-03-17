@@ -1,0 +1,20 @@
+<!-- <p *ngFor="let cat of categories">
+ {{cat.title}}
+</p> -->
+<div class="list-group">
+
+    <div class="card border shadow">
+        <a href="" [routerLink]="'/store'"  class="list-group-item list-group-item-action">
+            <img class="cat-image mx-1" [src]="'https://5.imimg.com/data5/ANDROID/Default/2022/11/UB/IF/MP/80746370/product-jpeg-500x500.jpg'">
+            <span class="fs-5">All Products</span>
+        </a>
+    </div>
+
+    <div class="card border shadow"   *ngFor="let cat of categories">
+        <a href="" routerLinkActive="active" [routerLink]="['/store',cat.categoryid,cat.title]" class="list-group-item list-group-item-action">
+            <img class="cat-image" [src]="cat.coverimage" alt="">
+            <span class="fs-5">{{cat.title}}</span>
+        </a>
+    </div>
+
+</div>

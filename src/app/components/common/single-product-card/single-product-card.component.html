@@ -1,0 +1,19 @@
+<div *ngIf="product" class="card h-100 " [ngClass]="{'border-danger':!product.stock,'text-success':!product.stock,'text-danger':!product.stock}">
+    <div class="card-body">
+
+        <div class="image-container text-center">
+            <img [src]="productservice.getporudctimageurl(product.id)" [alt]="product.title"  onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfZRYpwcUf3tXeAPF-zSQ-R2QwO459rxyU5Jy9dPrYT--l-Xom-79P0SFvguNst_16X40&usqp=CAU'">
+        </div>
+        <h4 class="mt-3">{{product.title}}</h4>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, quod.</p>
+    
+    </div>
+    <div class=" px-3 row ">
+        <p class="fs-5">price:₹<span class="fw-bold text-muted text-decoration-line-through">{{product.price}}   </span>  <span class="fw-bolder text-success"> ₹{{product.discount}}</span></p>
+
+        <button (click)="addtocartrequest(product)" class="btn" [ngClass]="{'btn-primary':product.stock,'btn-danger':!product.stock}"> {{!product.stock? "out of stock":" add to card "}}</button>
+        <button   [routerLink]="['/product',product.id]" class="btn btn-warning my-2">view</button>
+    
+    </div>
+
+    </div>
