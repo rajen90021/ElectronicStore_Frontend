@@ -26,6 +26,7 @@ import { ViewProducttComponent } from './components/pages/view-productt/view-pro
 import { ViewProductComponent } from './components/admin/view-product/view-product.component';
 import { CartComponent } from './components/pages/cart/cart.component';
 import { MyOrdersComponent } from './components/pages/my-orders/my-orders.component';
+import { ForgotpasswordpageComponent } from './components/pages/forgotpasswordpage/forgotpasswordpage.component';
 
 const routes: Routes = [
 {
@@ -52,6 +53,10 @@ const routes: Routes = [
 path:"store",
 component:StoreComponent
 },
+{
+  path:"forgotpasswordpage",
+  component:ForgotpasswordpageComponent
+  },
 {
   path:'store/:categoryid/:categorytitle',
   component:StoreCategoriesComponent

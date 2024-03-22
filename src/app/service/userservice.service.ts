@@ -11,6 +11,11 @@ export class UserserviceService {
 
   constructor( private http:HttpClient) { }
 
+  
+   checkemail(email:String){
+  return this.http.get<User>(`${environment.baseurl}/users/email/${email}`)
+   }
+
   signupuser(user:User){
 
     return this.http.post(`${environment.baseurl}/users`,user);

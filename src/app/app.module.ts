@@ -47,6 +47,7 @@ import { ViewOrderCardComponent } from './components/admin/view-order-card/view-
 import { MyOrdersComponent } from './components/pages/my-orders/my-orders.component';
 import { SocialLoginModule,SocialAuthServiceConfig, GoogleLoginProvider, GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
+import { ForgotpasswordpageComponent } from './components/pages/forgotpasswordpage/forgotpasswordpage.component';
 
 
 
@@ -87,7 +88,8 @@ import { NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
     CartComponent,
     CartItemComponent,
     ViewOrderCardComponent,
-    MyOrdersComponent
+    MyOrdersComponent,
+    ForgotpasswordpageComponent
   ],
   imports: [
     BrowserModule,
